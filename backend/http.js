@@ -8,3 +8,12 @@ export async function signUp(email, password) {
   );
   return response.data.idToken;
 }
+
+export async function signIn(email, password) {
+  const response = await axios.post(
+    'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=' +
+      API_KEY,
+    {email: email, password: password, returnSecureToken: true},
+  );
+  return response.data.idToken;
+}

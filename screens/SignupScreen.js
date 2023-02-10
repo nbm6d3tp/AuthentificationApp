@@ -5,6 +5,8 @@ import AuthContent from '../components/Auth/AuthContent';
 import LoadingOverlay from '../components/ui/LoadingOverlay';
 import {useDispatch} from 'react-redux';
 import {setAuthentification} from '../redux/authentificationSlice';
+import {storeData} from '../backend/asyncStore';
+
 function SignupScreen() {
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(false);
@@ -12,6 +14,7 @@ function SignupScreen() {
     try {
       setIsLoading(true);
       const idToken = await signUp(email, password);
+      storeData(idToken);
       dispatch(setAuthentification(idToken));
     } catch (err) {
       Alert.alert('An error occurred while sign up');
